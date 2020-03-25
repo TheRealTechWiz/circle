@@ -6,21 +6,31 @@
 <!-- Load the Paper.js library -->
 <script type="text/javascript" src="paper-full.js"></script>
 <!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.js"></script>
+<!-- Define inlined PaperScript associate it with myCanvas -->
 <script type="text/paperscript" canvas="myCanvas">
-//var circle;
+    var sound = new Howl({
+        src: ['sounds/bubbles.mp3']
+    });
+
+var circlesar=[];
     function onKeyDown(){
+        sound.play();
     var maxpoint = new Point(view.size.width, view.size.height);
     var random = new Point.random();
     var point = maxpoint*random;
     console.log("pressed");
-    var circle = new Path.Circle(point,10);
+    var circle = new Path.Circle(point,500);
     circle.fillColor="red";
+    circlesar.push(circle);
 }
 
-<!-- function onFrame(event){
-    console.log(circle);
-    circle.fillColor.hue++;
-} -->
+function onFrame(event){
+   for(var i =0; i<circlesar.length;i++){
+    circlesar[i].fillColor.hue++;
+    circlesar[i].scale(.98);
+}
+}
 </script>
 </head>
 <body>
